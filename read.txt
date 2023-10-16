@@ -8,3 +8,7 @@ apt update && apt install lsb-core -y
 
 
 apt clean all && apt update && apt dist-upgrade -y
+
+
+bash /app/init.sh db_name db_user db_pass db_port
+bash /app/init.sh -n db_test -u pg_user -s 1234567 -p 5432
