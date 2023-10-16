@@ -1,0 +1,6 @@
+services:
+  ubuntu:
+    image: ubuntu:22.04
+    restart: unless-stopped
+    volumes:
+      - ./app:/app
