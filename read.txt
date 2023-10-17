@@ -1,4 +1,9 @@
-docker run -ti --rm --name ubuntu -v D:\Coding_projects\2-WORK\postgres_bash\app:/app bash_ubuntu:latest /bin/bash
+docker image build -t ubuntu_bash .
+
+docker run -ti --rm --name ubuntu -p 3322:22 -v D:\Coding_projects\2-WORK\postgres_bash\app:/app ubuntu_bash:latest /bin/bash
+
+
+
 
 docker exec -it ubuntu /bin/bash
 apt update && apt install lsb-core -y
