@@ -1,4 +1,9 @@
 #!/bin/bash
+sudo apt-get install -y dbus-user-session
+sudo apt-get install -y iptables
+sudo apt-get install -y uidmap
+sudo apt-get install -y sshpass
+
 
 # Данные для PostgreSQL
 while getopts n:u:s:p: flag
@@ -43,20 +48,26 @@ if [ $(id -u) -eq 0 ]; then
 	else
 		pass=$(perl -e 'print crypt($ARGV[0], "password")' $password)
 		useradd -m -p "$pass" "$username"
+        sudo gpasswd -a $username sudo
+        echo "$username ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 		[ $? -eq 0 ] && echo "User has been added to system!" || echo "Failed to add a user!"
 	fi
 else
-	echo "Skipping useradd step."
+	echo "Only root may add a user to the system."
+	exit 2
 fi
 # Добавляем юзера конец
 
+# Установка докера
+chmod +rx /app/docker.sh
+sshpass -p $password ssh $username@localhost bash /app/docker.sh
 
-
-
-# gpasswd -a $username sudo
-
-# nano /etc/ssh/sshd_config
-# nano /etc/ssh/ssh_config
-
-cat /etc/ssh/ssh_config
-
+# Запуск контейнера с постгрес
+su - $username
+docker run --name veeneo-postgres \
+-p $db_port:5432 \
+--restart unless-stopped \
+-e POSTGRES_DB=$db_name \
+-e POSTGRES_USER=$db_user \
+-e POSTGRES_PASSWORD=$db_pass \
+-d postgres:15
