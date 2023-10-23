@@ -1,9 +1,6 @@
 #!/bin/bash
 sudo apt update
-sudo apt-get install -y dbus-user-session
-sudo apt-get install -y iptables
-sudo apt-get install -y uidmap
-sudo apt-get install -y sshpass
+sudo apt-get install -y dbus-user-session iptables uidmap sshpass
 
 
 # Данные для PostgreSQL
@@ -69,11 +66,16 @@ ssh-keyscan localhost >> ~/.ssh/known_hosts
 sshpass -p $password ssh $username@localhost bash $DIR/veeneo_docker.sh
 
 # Запуск контейнера с постгрес
-su - $username
-docker run --name veeneo-postgres \
+runuser -l  $username -c "docker run --name veeneo-postgres \
 -p $db_port:5432 \
 --restart unless-stopped \
 -e POSTGRES_DB=$db_name \
 -e POSTGRES_USER=$db_user \
 -e POSTGRES_PASSWORD=$db_pass \
--d postgres:15
+-d postgres:15"
+
+
+echo "**=====================================**"
+echo "  PostgreSQL is successfully installed!"
+echo "  Already running on port $db_port."
+echo "**=====================================**"
