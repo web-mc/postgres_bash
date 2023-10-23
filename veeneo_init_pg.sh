@@ -4,34 +4,10 @@ sudo apt-get install -y dbus-user-session iptables uidmap sshpass
 
 
 # Данные для PostgreSQL
-while getopts n:u:s:p: flag
-do
-    case "${flag}" in
-        n) db_name=${OPTARG};;
-        u) db_user=${OPTARG};;
-        s) db_pass=${OPTARG};;
-        p) db_port=${OPTARG};;
-    esac
-done
-
-msg="Your command should be looks like:\nbash init.sh -n db_name -u db_user -s db_pass -p db_port\n"
-if [ -z $db_name ]; then
-    echo 'Eror: -n (db_name) are not defined.'
-    echo -e "$msg"
-    exit 1
-elif [ -z $db_user ]; then
-    echo 'Eror: -u (db_user) are not defined.'
-    echo -e "$msg"
-    exit 1
-elif [ -z $db_pass ]; then
-    echo 'Eror: -s (db_pass) are not defined.'
-    echo -e "$msg"
-    exit 1
-elif [ -z $db_port ]; then
-    echo 'Eror: -p (db_port) are not defined.'
-    echo -e "$msg"
-    exit 1
-fi
+db_name=""
+db_user=""
+db_pass=""
+db_port=""
 # Данные для PostgreSQL КОНЕЦ
 
 
