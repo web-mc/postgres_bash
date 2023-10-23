@@ -3,7 +3,7 @@ sudo apt update
 sudo apt-get install -y dbus-user-session iptables uidmap sshpass
 
 
-# Данные для PostgreSQL
+# Данные для PostgreSQL15
 while getopts n:u:s:p: flag
 do
     case "${flag}" in
