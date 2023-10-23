@@ -1,4 +1,5 @@
 #!/bin/bash
+sudo apt update
 sudo apt-get install -y dbus-user-session
 sudo apt-get install -y iptables
 sudo apt-get install -y uidmap
@@ -58,9 +59,14 @@ else
 fi
 # Добавляем юзера конец
 
+# username="test"
+# password="test"
+
 # Установка докера
-chmod +rx /app/docker.sh
-sshpass -p $password ssh $username@localhost bash /app/docker.sh
+DIR="$(dirname "$(realpath "$0")")"
+chmod +rx $DIR/veeneo_docker.sh
+ssh-keyscan localhost >> ~/.ssh/known_hosts
+sshpass -p $password ssh $username@localhost bash $DIR/veeneo_docker.sh
 
 # Запуск контейнера с постгрес
 su - $username
