@@ -56,8 +56,6 @@ else
 fi
 # Добавляем юзера конец
 
-# username="test"
-# password="test"
 
 # Установка докера
 DIR="$(dirname "$(realpath "$0")")"

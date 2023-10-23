@@ -1,7 +1,3 @@
-echo 'Docker install started.'
-# export XDG_RUNTIME_DIR="/run/user/$(id -u)"
-# export DBUS_SESSION_BUS_ADDRESS="unix:path=${XDG_RUNTIME_DIR}/bus"
-
 # Стандартная установка докера
 sudo apt-get install ca-certificates curl gnupg
 sudo install -m 0755 -d /etc/apt/keyrings
