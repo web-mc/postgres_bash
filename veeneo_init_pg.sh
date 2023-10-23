@@ -71,9 +71,3 @@ runuser -l  $username -c "docker run --name veeneo-postgres \
 -e POSTGRES_USER=$db_user \
 -e POSTGRES_PASSWORD=$db_pass \
 -d postgres:15"
-
-
-echo "**=====================================**"
-echo "  PostgreSQL is successfully installed!"
-echo "  Already running on port $db_port."
-echo "**=====================================**"
