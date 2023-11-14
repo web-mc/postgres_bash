@@ -70,4 +70,5 @@ runuser -l  $username -c "docker run --name veeneo-postgres \
 -e POSTGRES_DB=$db_name \
 -e POSTGRES_USER=$db_user \
 -e POSTGRES_PASSWORD=$db_pass \
+-v pg_data:/var/lib/postgresql/data \
 -d postgres:15"
